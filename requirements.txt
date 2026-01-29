@@ -1,0 +1,8 @@
+# Global Thermal Nuclear War - Python Dependencies
+
+# Terminal UI and colors
+colorama>=0.4.6
+windows-curses>=2.3.0; sys_platform == 'win32'
+
+# Utilities
+python-dateutil>=2.8.2
