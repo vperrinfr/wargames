@@ -133,44 +133,22 @@ def launch_missile_sequence():
     print_yellow("\n✓ CODES VERIFIED")
     time.sleep(1)
     
-    # Countdown
+    # Countdown - stops at 8
     print_red("\n\nLAUNCH COUNTDOWN:")
-    for i in range(10, 0, -1):
+    for i in range(10, 7, -1):
         print_red(f"\n    {i:2d}...")
         time.sleep(0.5)
     
-    print_red("\n\n    LAUNCH!")
-    time.sleep(1)
-    
-    # Missile trajectory (shortened)
-    print_yellow("\n\n" + "=" * 80)
-    print_yellow("MISSILE TRAJECTORY:")
-    print_yellow("=" * 80)
-    
-    for i in range(5):
-        progress = i / 4
-        bar = "█" * int(progress * 40)
-        missile = "🚀"
-        print(f"\r  [{bar}{missile}{' ' * (40 - len(bar))}] {int(progress * 100)}%", end='', flush=True)
-        time.sleep(0.3)
-    
-    print()
-    time.sleep(0.5)
-    
-    # BLACK SCREEN - dramatic pause
-    clear_screen()
+    # Interrupt at 8
+    print_yellow("\n\n⚠ LAUNCH SEQUENCE INTERRUPTED")
+    print_green("\nRETURNING TO GAME LIST...")
     time.sleep(2)
     
-    # Return to game list immediately
-    print_yellow("\n\nRETURNING TO GAME LIST...")
-    time.sleep(1)
+
 
 
     
-    print_green("\n\nWOPR: A STRANGE GAME.")
-    time.sleep(2)
-    print_green("WOPR: THE ONLY WINNING MOVE IS NOT TO PLAY.")
-    time.sleep(3)
+
 
 
 def movie_mode():
@@ -211,10 +189,6 @@ def movie_mode():
             if target in ['1', '2', '3']:
                 # Launch missile sequence
                 launch_missile_sequence()
-                
-                # Return to game list
-                print_yellow("\n\nRETURNING TO GAME LIST...")
-                time.sleep(2)
                 continue
             else:
                 continue

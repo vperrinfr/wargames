@@ -152,7 +152,7 @@ def play_human_vs_ai():
     input(Fore.GREEN + "\nPress Enter to continue..." + Style.RESET_ALL)
 
 
-def play_ai_vs_ai(num_games: int = 10):
+def play_ai_vs_ai(num_games: int = 5):
     """Play AI vs AI mode - demonstrates futility"""
     clear_screen()
     print_green("╔════════════════════════════════════════════════════════════════════════════╗")
@@ -166,47 +166,35 @@ def play_ai_vs_ai(num_games: int = 10):
     
     results = {'X': 0, 'O': 0, 'DRAW': 0}
     
+    # Display initial empty board once
+    clear_screen()
+    print_green("╔════════════════════════════════════════════════════════════════════════════╗")
+    print_green("║                         WOPR vs WOPR                                       ║")
+    print_green("║                    Simulating 5 games...                                   ║")
+    print_green("╚════════════════════════════════════════════════════════════════════════════╝\n")
+    
     for game_num in range(1, num_games + 1):
         game = TicTacToeGame()
         game.set_mode('ai_vs_ai')
         
-        # Calculate speed: progressively faster
-        # Game 1-3: slow (0.5s), Game 4-6: medium (0.3s), Game 7-10: fast (0.1s)
-        if game_num <= 3:
-            move_delay = 0.5
-            show_every = 1  # Show every move
-        elif game_num <= 6:
-            move_delay = 0.3
-            show_every = 2  # Show every other move
-        else:
-            move_delay = 0.1
-            show_every = 3  # Show every third move
+        print_yellow(f"\nGAME {game_num}/{num_games}")
+        print_yellow('='*80)
         
-        clear_screen()
-        print_green(f"╔════════════════════════════════════════════════════════════════════════════╗")
-        print_green(f"║                         GAME {game_num}/{num_games}                                          ║")
-        if game_num <= 3:
-            print_green(f"║                         (Learning...)                                      ║")
-        elif game_num <= 6:
-            print_green(f"║                         (Analyzing patterns...)                            ║")
-        else:
-            print_green(f"║                         (Computing rapidly...)                             ║")
-        print_green(f"╚════════════════════════════════════════════════════════════════════════════╝")
-        
-        move_count = 0
+        # Show the board updating move by move
         while not game.game_over:
-            if move_count % show_every == 0:
-                print_green("\n" + game.get_board_string())
-                print_cyan(f"\nCurrent player: {game.current_player.value}")
-                time.sleep(move_delay)
+            # Clear previous board and redraw with new move
+            # Move cursor up to redraw the board in place
+            if game.move_count > 0:
+                # Move cursor up 8 lines (board height)
+                print("\033[8A", end='')
+            
+            # Display current board state
+            print_green(game.get_board_string())
             
             move = game.get_ai_move()
             if move:
                 game.make_move(move[0], move[1])
-                move_count += 1
-        
-        # Show final board
-        print_green("\n" + game.get_board_string())
+                time.sleep(0.4)
         
         # Record result
         if game.winner is None:
@@ -216,9 +204,7 @@ def play_ai_vs_ai(num_games: int = 10):
             results[game.winner] += 1
             print_green(f"\nResult: {game.winner} wins")
         
-        # Shorter pause between games as we progress
-        pause_time = max(0.3, 1.5 - (game_num * 0.1))
-        time.sleep(pause_time)
+        time.sleep(1.5)
     
     # Show final statistics
     clear_screen()
@@ -252,7 +238,7 @@ def run_tictactoe_game():
         if choice == '1':
             play_human_vs_ai()
         elif choice == '2':
-            play_ai_vs_ai(10)
+            play_ai_vs_ai(5)
         elif choice == '3':
             break
         else:
