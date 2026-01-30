@@ -140,60 +140,32 @@ def launch_missile_sequence():
         time.sleep(0.5)
     
     print_red("\n\n    LAUNCH!")
-    time.sleep(0.5)
+    time.sleep(1)
     
-    # Missile trajectory
+    # Missile trajectory (shortened)
     print_yellow("\n\n" + "=" * 80)
     print_yellow("MISSILE TRAJECTORY:")
     print_yellow("=" * 80)
     
-    for i in range(10):
-        progress = i / 9
+    for i in range(5):
+        progress = i / 4
         bar = "█" * int(progress * 40)
-        missile = "🚀" if i < 9 else "💥"
+        missile = "🚀"
         print(f"\r  [{bar}{missile}{' ' * (40 - len(bar))}] {int(progress * 100)}%", end='', flush=True)
         time.sleep(0.3)
     
     print()
-    time.sleep(1)
+    time.sleep(0.5)
     
-    # Impact simulation
-    print_red("\n\n⚠ IMPACT DETECTED ⚠")
-    time.sleep(1)
-    
-    print_yellow("\nCALCULATING CASUALTIES...")
-    time.sleep(1)
-    
-    print_red("\nESTIMATED CASUALTIES: 2,500,000")
-    time.sleep(1)
-    
-    print_red("RADIATION LEVELS: CRITICAL")
-    time.sleep(1)
-    
-    print_red("RETALIATION PROBABILITY: 100%")
+    # BLACK SCREEN - dramatic pause
+    clear_screen()
     time.sleep(2)
     
-    # WOPR realizes
-    print_yellow("\n\n" + "=" * 80)
-    print_yellow("WOPR ANALYSIS:")
-    print_yellow("=" * 80)
+    # Return to game list immediately
+    print_yellow("\n\nRETURNING TO GAME LIST...")
     time.sleep(1)
-    
-    print_green("\nWOPR: ANALYZING OUTCOME...")
-    time.sleep(2)
-    
-    print_green("WOPR: CALCULATING WINNING SCENARIOS...")
-    time.sleep(2)
-    
-    print_green("WOPR: RUNNING SIMULATIONS...")
-    for i in range(100):
-        print(f"\r  Simulations: {i+1}/100", end='', flush=True)
-        time.sleep(0.02)
-    print()
-    time.sleep(1)
-    
-    print_yellow("\n\nRESULT: NO WINNING SCENARIO FOUND")
-    time.sleep(2)
+
+
     
     print_green("\n\nWOPR: A STRANGE GAME.")
     time.sleep(2)
