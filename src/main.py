@@ -26,6 +26,7 @@ from src.ui.ascii_art import (
 )
 from src.ui.animations import TypingAnimation, LoadingBarAnimation, BlinkingText
 from src.utils.config import MESSAGES, WOPR_QUOTES
+from src.ui.tictactoe_ui import run_tictactoe_game
 
 
 def clear_screen():
@@ -124,7 +125,14 @@ def show_intro_sequence():
     print_green("\n")
     game_choice = input(Fore.GREEN + "WHICH GAME? " + Style.RESET_ALL).upper()
     
-    if "GLOBAL" in game_choice or "THERMONUCLEAR" in game_choice or "WAR" in game_choice:
+    # Check for TicTacToe (easter egg from WarGames movie)
+    if "TIC" in game_choice or "TAC" in game_choice or "TOE" in game_choice:
+        print_green("\nLOADING TIC-TAC-TOE...")
+        time.sleep(1)
+        run_tictactoe_game()
+        # After TicTacToe, continue to main menu
+        return
+    elif "GLOBAL" in game_choice or "THERMONUCLEAR" in game_choice or "WAR" in game_choice:
         print_green("\nLOADING GLOBAL THERMONUCLEAR WAR...")
         time.sleep(1)
     else:
